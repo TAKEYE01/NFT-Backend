@@ -24,14 +24,14 @@ export class AuthService {
     Promise<RegistrationStatus> {
         let status: RegistrationStatus = {
             success: true,
-            message: 'user registered',
+            message: 'User registered.',
         };
         try {
             await this.userService.create(userDto);
         } catch (err) {
             status = {
                 success: false,
-                message: err,
+                message: 'User already exists.',
             };
         }
         return status;

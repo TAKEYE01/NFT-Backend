@@ -14,8 +14,4 @@ export class nft_user {
 
     @Column({ type: 'varchar', nullable: false, length: 120})
     public email: string;
-    
-    /*@BeforeInsert() async hashPassword() {
-        this.password = await bcrypt.hash(this.password, 10);
-    }*/
 }
