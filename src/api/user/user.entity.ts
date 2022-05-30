@@ -1,29 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import bcrypt from 'bcrypt';
 
-@Entity()
+@Entity('nft_user')
 export class nft_user {
-    @PrimaryGeneratedColumn()
-    public id: number;
+    @PrimaryGeneratedColumn('uuid')
+    public id: string;
 
-    @Column({ type: 'varchar', length: 50})
+    @Column({ type: 'varchar', length: 50, nullable: false, unique: true})
     public username: string;
 
-    @Column({ type: 'varchar', length: 120})
-    public email: string;
-
-    @Column({ type: 'text'})
+    @Column({ type: 'varchar', nullable: false})
     public password: string;
 
-    @Column({ type: 'boolean', default: false})
-    public isDeleted: boolean;
-
-    @CreateDateColumn({ type: 'timestamp' })
-    public createdAt!: Date;
-
-    @CreateDateColumn({ type: 'timestamp' })
-    public updatedAt!: Date;
-
-    @CreateDateColumn({ type: 'timestamp', default: null })
-    public deletedAt!: Date;
+    @Column({ type: 'varchar', nullable: false, length: 120})
+    public email: string;
     
+    /*@BeforeInsert() async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
+    }*/
 }
