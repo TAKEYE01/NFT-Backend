@@ -43,15 +43,14 @@ export class AuthService {
             success: true,
             message: 'User Logged in.',
         };
+        
         //Find user in database
         const user = await this.userService.findByLogin(loginUserDto);
 
         //Generate and sign token
         const token = this._createToken(user);
 
-        return {
-            username: user.username, ...token
-        } && status;
+        return{status, username: user.username, ...token};
     }
 
     private _createToken({ username }: UserDto): any {

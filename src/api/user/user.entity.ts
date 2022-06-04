@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
-import bcrypt from 'bcrypt';
+import { bcrypt } from 'bcryptjs';
 
 @Entity('nft_user')
 export class nft_user {
@@ -14,4 +14,5 @@ export class nft_user {
 
     @Column({ type: 'varchar', nullable: false, length: 120})
     public email: string;
+
 }

@@ -6,6 +6,7 @@ import { CreateUserDto } from './user.createuserdto';
 import { UserDto } from './user.dto';
 import { nft_user } from './user.entity';
 import { LoginUserDto } from './user.login';
+import { bcrypt } from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -22,11 +23,11 @@ export class UserService {
         const user = await this.repository.findOne({ where: { username } });
 
         if(!user) {
-            throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
         }
 
         //Compare passwords
-        const areEqual = await (user.password === password);
+        const areEqual = await user.password === password;
 
         if(!areEqual) {
             throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
